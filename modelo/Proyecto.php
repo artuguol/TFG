@@ -9,7 +9,7 @@ class Proyecto
     private $tipo;
     private $titulo;
     private $descripcion;
-    private $listaPregunta;
+    //private $listaPregunta;
     private $listaCategoria;
     private $documentoAyuda;
 

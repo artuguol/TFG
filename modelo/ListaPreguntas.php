@@ -18,4 +18,11 @@ class ListaPreguntas
     }
 
 
+    public function obtenerPreguntasPorId($id){
+
+
+
+    }
+
+
 }
