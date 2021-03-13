@@ -40,6 +40,18 @@ class Usuario
         $this->carpetaFotos = "fotos";
     }
 
+    public function llenar($id, $nombre, $apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto)
+    {
+        $this->id = $id;
+        $this->nombre = $nombre;
+        $this->apellidos = $apellidos;
+        $this->edad = $edad;
+        $this->email = $email;
+        $this->contrasena = $contrasena;
+        $this->tipoCuenta = $tipoCuenta;
+        $this->foto = $foto;
+    }
+
 
 
     /**
@@ -178,5 +190,68 @@ class Usuario
     }
 
 
+    public function obtenerPorId($id){
+
+        $sql = "SELECT id, nombre, apellidos, edad, email, contrasena, tipoCuenta, foto FROM ".$this->tabla."WHERE id=".$id;
+        $conexion = new Bd();
+        $res = $conexion->consulta($sql);
+        list($id, $nombre,$apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto) = mysqli_fetch_array($res);
+        $this->llenar($id, $nombre, $apellidos,$edad, $email, $contrasena, $tipoCuenta, $foto);
+
+    }
+
+    public function borrarUsuario($id){
+
+        $sql = "SELECT id, nombre, apellidos, edad, email, contrasena, tipoCuenta, foto FROM ".$this->tabla."WHERE id=".$id;
+        $conexion = new Bd();
+        $res = $conexion->consulta($sql);
+
+    }
+
+    public function imprimeteEnTr(){
+
+        $html = "<tr><td>".$this->id."</td>
+                        <td>".$this->nombre."</td>
+                        <td>".$this->apellidos."</td>
+                        <td>".$this->edad."</td>
+                        <td>".$this->email."</td>
+                        <td>".$this->contrasena."</td>
+                        <td>".$this->tipoCuenta."</td>
+                        <td><img src='".$this->carpetaFotos.$this->foto."'></td>
+                        <td><a href='verUsuario.php?id=".$this->id."'>Ver</a> </td>
+                        <td><a href='ed_usuario.php?id=".$this->id."'>Editar</a> </td>
+                        <td><a href='javascript:borrarUsuario(".$this->id.")'>Borrar</a> </td>
+                        </tr>";
+
+        return $html;
+
+    }
+
+    public function imprimirEnFicha() {
+
+        $html = "<table border='1'>";
+
+        $html .= "<tr><th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Edad</th>
+                        <th>Email</th>
+                        <th>Contraseña</th>
+                        <th>Tipo de Cuenta</th>
+                        <th>Foto</th>
+                       </tr>";
+        $html .="  <tr><td>".$this->id."</td>
+                        <td>".$this->nombre."</td>
+                        <td>".$this->apellidos."</td>
+                        <td>".$this->edad."</td>
+                        <td>".$this->email."</td>
+                        <td>".$this->contrasena."></td>
+                        <td>".$this->tipoCuenta."></td>
+                        <td><img src='".$this->foto."'></td>
+                        </tr></table>";
+
+        return $html;
+
+    }
 
 }
