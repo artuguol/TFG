@@ -1,6 +1,15 @@
 <?php
 
+require "../modelo/Usuario.php";
+require "../modelo/Bd.php";
+require "../modelo/funciones.php";
+
     if(isset($_POST) && !empty($_POST)){
+
+        $usuario = new Usuario();
+        $usuario->insertar($_POST,$_FILES['foto']);
+       // header('location:listas/listarUsuario.php');
+
         echo "<pre>";
         print_r($_POST);
         echo "</pre>";

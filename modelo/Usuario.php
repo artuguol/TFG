@@ -12,6 +12,7 @@ class Usuario
     private $contrasena;
     private $tipoCuenta;
     private $foto;
+    private $tabla;
 
     /**
      * Usuario constructor.
@@ -23,8 +24,9 @@ class Usuario
      * @param $contrasena
      * @param $tipoCuenta
      * @param $foto
+     * @param $tabla
      */
-    public function __construct($id, $nombre, $apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto)
+    public function __construct($id = "", $nombre = "", $apellidos = "", $edad = "", $email = "", $contrasena = "", $tipoCuenta = "", $foto = "")
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -34,7 +36,11 @@ class Usuario
         $this->contrasena = $contrasena;
         $this->tipoCuenta = $tipoCuenta;
         $this->foto = $foto;
+        $this->tabla = "Usuarios";
+        $this->carpetaFotos = "fotos";
     }
+
+
 
     /**
      * @return mixed
@@ -162,6 +168,13 @@ class Usuario
     public function setFoto($foto)
     {
         $this->foto = $foto;
+    }
+
+    public function insertar($datos, $foto){
+
+        $conexion = new Bd();
+        $conexion->insertarElemento($this->tabla,$datos,$this->carpetaFotos, $foto);
+
     }
 
 

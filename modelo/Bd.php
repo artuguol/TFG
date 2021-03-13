@@ -6,8 +6,8 @@ class Bd
 
     private $server = "localhost";
     private $usuario = "root";
-    private $pass = "1234";
-    private $basedatos = "prueba2";
+    private $pass = "";
+    private $basedatos = "tfg_prueba";
 
     private $conexion;
     private $resultado;
@@ -32,14 +32,14 @@ class Bd
 
         }
 
-        if ($foto['name'] != ""){
+        /*if ($foto['name'] != ""){
 
             $ruta =subirFoto($foto,$carpeta);
 
             $clave[] = "foto";
             $valores[] = "'".$ruta."'";
 
-        }
+        }*/
 
         $sql = "INSERT INTO ".$tabla." (".implode(',', $claves).") VALUES (".implode(",", $valores).")";
         echo $sql;
