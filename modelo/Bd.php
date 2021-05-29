@@ -6,8 +6,8 @@ class Bd
 
     private $server = "localhost";
     private $usuario = "root";
-    private $pass = "";
-    private $basedatos = "tfg_prueba";
+    private $pass = "1234";
+    private $basedatos = "tfg";
 
     private $conexion;
     private $resultado;
@@ -31,8 +31,8 @@ class Bd
             $valores[] = "'".$valor."'";
 
         }
-
-        /*if ($foto['name'] != ""){
+/*
+        if ($foto['name'] != ""){
 
             $ruta =subirFoto($foto,$carpeta);
 
@@ -53,6 +53,6 @@ class Bd
         $this->resultado = $this->conexion->query($consulta);
         $res = $this->resultado;
         return $res;
-    }
+    } 
 
 }

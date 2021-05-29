@@ -14,7 +14,7 @@ function lanzaError($msg){
     echo "<script>alert('".$msg."')</script>";
 
 }
-function subirFoto($archivoFoto,$carpeta,$tamanoMaxArchivo = 5000000){
+function subirFoto($archivoFoto,$carpeta,$tamanoMaxArchivo = 50000000000000){
 
     $ruta = "";
     $nombreArchivo = $archivoFoto['name'];
@@ -22,7 +22,7 @@ function subirFoto($archivoFoto,$carpeta,$tamanoMaxArchivo = 5000000){
     $tamano = $archivoFoto['size'];
 
     //Valido que el formato de imagen sea un jpeg o un png
-    if((strpos($tipo, "jpeg") || strpos($tipo, "png")) && $tamano < $tamanoMaxArchivo ){
+    if((strpos($tipo, "jpeg") || strpos($tipo, "png") || strpos($tipo, "jpg")) && $tamano < $tamanoMaxArchivo ){
         $nombreArchivo = limpiar_caracteres_especiales($nombreArchivo);
 
         // reviso si ya existe algun archivo con el mismo nombre en la carpeta.

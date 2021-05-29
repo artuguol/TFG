@@ -25,8 +25,8 @@ class ListaUsuarios
 
         $res = $conexion->consulta($sql);
 
-        while (list($id, $usuario, $contrasena, $foto) = mysqli_fetch_array($res)){
-            $fila = new Usuario($id, $usuario, $contrasena, $foto);
+        while (list($id, $nombre,$apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto, $permiso) = mysqli_fetch_array($res)){
+            $fila = new Usuario($id, $nombre,$apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto, $permiso);
             array_push($this->lista, $fila);
         }
 
@@ -36,10 +36,15 @@ class ListaUsuarios
 
         $html = "<table>";
         $html.= "<tr><th>ID</th>
-                    <th>Usario</th>
-                    <th>Contraseña</th>
-                    <th>Foto</th>
-                    <th colspan='3'></th> </tr>";
+                    <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Edad</th>
+                        <th>Email</th>
+                        <th>Contraseña</th>
+                        <th>Tipo de Cuenta</th>
+                        <th>Foto</th>
+                        <th>Permiso</th>
+                    </tr>";
         for ($i = 0; $i < sizeof($this->lista); $i++){
             $html .= $this->lista[$i]->imprimirEnTr();
         }

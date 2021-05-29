@@ -6,7 +6,7 @@ function validar(){
     var email = document.getElementById("email");
     var contrasena = document.getElementById("contrasena");
     var tipoCuenta = document.getElementById("tipoCuenta");
-    var foto = document.getElementById("foto");
+    //var foto = document.getElementById("foto");
 
     var correcto = true;
 
@@ -45,13 +45,13 @@ function validar(){
         correcto = false;
     } else {
         tipoCuenta.style.backgroundColor = "white";
-    }
+    }/*
     if(foto.value == ""){
         foto.style.backgroundColor = "red";
         correcto = false;
     } else {
         foto.style.backgroundColor = "white";
-    }
+    }*/
     alert(nombre)
 
     if(correcto){
@@ -80,27 +80,27 @@ function ajax() {
 }
 
 var borrar = new ajax();
-function borrarFigura(id) {
+function borrarUsuario(id) {
 
-    if(confirm("¿Seguro que deseas eliminar la figura de la BD?")) {
-        var myurl = 'llamadas/borrarFigura.php';
+    if(confirm("¿Seguro que deseas eliminar el usuario de la BD?")) {
+        var myurl = 'llamadas/borrarUsuario.php';
         myRand = parseInt(Math.random() * 999999999999999);
         modurl = myurl + '?rand=' + myRand + '&id=' + id;
         borrar.open("GET", modurl, true);
-        borrar.onreadystatechange = borrarFiguraResponse;
+        borrar.onreadystatechange = borrarUsuarioResponse;
         borrar.send(null);
     }
 
 }
 
-function borrarFiguraResponse() {
+function borrarUsuarioResponse() {
 
     if (borrar.readyState == 4) {
         if(borrar.status == 200) {
 
-            var listaFiguras = borrar.responseText;
+            var listaUsuarios = borrar.responseText;
             //document.getElementsByClassName('lista')[0].innerHTML = listaFiguras;
-            document.getElementById('lista').innerHTML =  listaFiguras;
+            document.getElementById('lista').innerHTML =  listaUsuarios;
         }
     }
 }

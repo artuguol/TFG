@@ -13,6 +13,7 @@ class Usuario
     private $tipoCuenta;
     private $foto;
     private $tabla;
+    private $permiso;
 
     /**
      * Usuario constructor.
@@ -25,8 +26,9 @@ class Usuario
      * @param $tipoCuenta
      * @param $foto
      * @param $tabla
+     * @param $permiso
      */
-    public function __construct($id = "", $nombre = "", $apellidos = "", $edad = "", $email = "", $contrasena = "", $tipoCuenta = "", $foto = "")
+    public function __construct($id = "", $nombre = "", $apellidos = "", $edad = "", $email = "", $contrasena = "", $tipoCuenta = "", $foto = "", $permiso = "")
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -38,9 +40,10 @@ class Usuario
         $this->foto = $foto;
         $this->tabla = "Usuarios";
         $this->carpetaFotos = "fotos";
+        $this->permiso = $permiso;
     }
 
-    public function llenar($id, $nombre, $apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto)
+    public function llenar($id, $nombre, $apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto, $permiso)
     {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -50,6 +53,7 @@ class Usuario
         $this->contrasena = $contrasena;
         $this->tipoCuenta = $tipoCuenta;
         $this->foto = $foto;
+        $this->permiso = $permiso;
     }
 
 
@@ -182,6 +186,19 @@ class Usuario
         $this->foto = $foto;
     }
 
+    public function getPermiso()
+    {
+        return $this->permiso;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setPermiso($permiso)
+    {
+        $this->permiso = $permiso;
+    }
+
     public function insertar($datos, $foto){
 
         $conexion = new Bd();
@@ -192,17 +209,17 @@ class Usuario
 
     public function obtenerPorId($id){
 
-        $sql = "SELECT id, nombre, apellidos, edad, email, contrasena, tipoCuenta, foto FROM ".$this->tabla."WHERE id=".$id;
+        $sql = "SELECT id, nombre, apellidos, edad, email, contrasena, tipoCuenta, foto, permiso FROM ".$this->tabla."WHERE id=".$id;
         $conexion = new Bd();
         $res = $conexion->consulta($sql);
-        list($id, $nombre,$apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto) = mysqli_fetch_array($res);
-        $this->llenar($id, $nombre, $apellidos,$edad, $email, $contrasena, $tipoCuenta, $foto);
+        list($id, $nombre,$apellidos, $edad, $email, $contrasena, $tipoCuenta, $foto, $permiso) = mysqli_fetch_array($res);
+        $this->llenar($id, $nombre, $apellidos,$edad, $email, $contrasena, $tipoCuenta, $foto, $permiso);
 
     }
 
     public function borrarUsuario($id){
 
-        $sql = "SELECT id, nombre, apellidos, edad, email, contrasena, tipoCuenta, foto FROM ".$this->tabla."WHERE id=".$id;
+        $sql = "SELECT id, nombre, apellidos, edad, email, contrasena, tipoCuenta, foto, permiso FROM ".$this->tabla."WHERE id=".$id;
         $conexion = new Bd();
         $res = $conexion->consulta($sql);
 
@@ -218,6 +235,7 @@ class Usuario
                         <td>".$this->contrasena."</td>
                         <td>".$this->tipoCuenta."</td>
                         <td><img src='".$this->carpetaFotos.$this->foto."'></td>
+                        <td>".$this->permiso."></td>
                         <td><a href='verUsuario.php?id=".$this->id."'>Ver</a> </td>
                         <td><a href='ed_usuario.php?id=".$this->id."'>Editar</a> </td>
                         <td><a href='javascript:borrarUsuario(".$this->id.")'>Borrar</a> </td>
@@ -239,6 +257,7 @@ class Usuario
                         <th>Contraseña</th>
                         <th>Tipo de Cuenta</th>
                         <th>Foto</th>
+                        <th>Permiso</th>
                        </tr>";
         $html .="  <tr><td>".$this->id."</td>
                         <td>".$this->nombre."</td>
@@ -248,6 +267,7 @@ class Usuario
                         <td>".$this->contrasena."></td>
                         <td>".$this->tipoCuenta."></td>
                         <td><img src='".$this->foto."'></td>
+                        <td>".$this->permiso."></td>
                         </tr></table>";
 
         return $html;
